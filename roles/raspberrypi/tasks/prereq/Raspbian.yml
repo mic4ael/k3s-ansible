@@ -7,6 +7,12 @@
     backrefs: true
   notify: reboot
 
+- name: Disable bluetooth LE
+  systemd:
+    name: bluetooth
+    enabled: no
+    state: stopped
+
 - name: Flush iptables before changing to iptables-legacy
   iptables:
     flush: true
@@ -23,3 +29,23 @@
     path: /usr/sbin/ip6tables-legacy
     name: ip6tables
   register: ip6_legacy
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install jq
+  ansible.builtin.apt:
+    name: raspberry-kernel-headers
+
+- name: Install open-iscsi/stable (for longhorn)
+  ansible.builtin.apt:
+    name: open-iscsi/stable
+
+- name: Install jq
+  ansible.builtin.apt:
+    name: jq
+
+- name: Run the equivalent of "apt-get clean" as a separate step
+  apt:
+    clean: yes
