@@ -56,6 +56,6 @@
 - name: Install a list of packages
   ansible.builtin.apt:
     pkg:
-    - htop
-    - sudo
-    - vim
+      - htop
+      - sudo
+      - vim
