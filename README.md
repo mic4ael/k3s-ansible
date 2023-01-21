@@ -58,3 +58,9 @@ To get access to your **Kubernetes** cluster just
 ```bash
 scp debian@master_ip:~/.kube/config ~/.kube/config
 ```
+
+## Things to do
+
+1. Add the user to sudoers
+2. Install `sudo` - `apt-get install sudo -y`
+3. Disable password prompt for the user
