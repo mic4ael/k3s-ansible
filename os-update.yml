@@ -1,7 +1,14 @@
 ---
 
-- hosts: k3s_cluster
-  gather_facts: yes
+- name: Upgrade k3s nodes
+  hosts: k3s_cluster
   become: yes
-  roles:
-    - role: os-update
+  tasks:
+    - name: Update apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Remove dependencies that are no longer required
+      ansible.builtin.apt:
+        autoremove: yes
